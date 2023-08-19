@@ -20,5 +20,8 @@
   "homepage": "https://github.com/lladysmall/movie-api#readme",
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.47.0"
   }
 }
