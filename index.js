@@ -2,10 +2,14 @@
 const express = require("express"),
   url = require("url"),
   http = require("http"),
-  morgan = require("morgan");
+  morgan = require("morgan"),
+  bodyParser = require("boddy-parser");
 
 //declare variables
 const app = express();
+
+//use body-parser
+app.use(bodyParser.json());
 
 let topMovies = [
   {
