@@ -76,15 +76,15 @@ app.get("/movies/:Title", (req, res) => {
 });
 
 //return data about a genre by name/title
-app.get("/genres/:genre", (req,  res) => {
-  res.json(genres.find((genre) =>
-  { return genre.Genre === req.params.Genre }));
+app.get("/movies/:Genre", (req,  res) => {
+  res.json(movies.find((movie) =>
+  { return movie.Genre === req.params.Genre }));
 });
 
 //return data about a director by name
-app.get("/directors/:name", (req, res) => {
-  res.json(directors.find((director) =>
-  { return directors.Name === req.params.Name }));
+app.get("/movies/:Director", (req, res) => {
+  res.json(movies.find((movie) =>
+  { return movie.Director === req.params.Director }));
 });
 
 //allow usesrs to register
