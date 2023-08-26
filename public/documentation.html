@@ -75,7 +75,7 @@
                 </tr>
                 <tr>
                     <td>Return Data About a Director</td>
-                    <td>/movies/[Name]</td>
+                    <td>/movies/[Director]</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a director.  Example:
@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                     <td>Allow New Users to Register</td>
-                    <td>/account</td>
+                    <td>/users</td>
                     <td>POST</td>
                     <td>A JSON object holding data about the user registering a new account.  Example:
                         <p>
@@ -109,7 +109,7 @@
                 </tr>
                 <tr>
                     <td>Allow Users to Update Their Username</td>
-                    <td>/account/[username]</td>
+                    <td>/users/[Name]/[username]</td>
                     <td>PATCH</td>
                     <td>None</td>
                     <td>A text message indicating that the user has successfully updated their username.</td>
@@ -123,14 +123,14 @@
                 </tr>
                 <tr>
                     <td>Allow Users to Remove a Movie from their List</td>
-                    <td>/favorites</td>
+                    <td>/users/[Username]/favorites/[Title]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message indicating that the user has successfully deleted a movie from their list of favorites.</td>
                 </tr>
                 <tr>
                     <td>Allow Users to Deregister</td>
-                    <td>/account</td>
+                    <td>/users/[Username]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message indicating that the user has successfully deregistered their account.</td>
