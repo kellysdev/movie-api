@@ -45,6 +45,8 @@ let movies = [
   }
 ];
 
+let users = [];
+
 //create server
 http.createServer((request, response) => {
   let addr = request.url;
@@ -91,7 +93,7 @@ app.get("/movies/:Director", (req, res) => {
 app.post("/users", (req, res) => {
   let newUser = req.body;
 
-  if(!newUser.name) {
+  if (!newUser.name) {
     const message = "Missing name in request body";
     res.status(400).send(message);
   } else {
@@ -101,9 +103,17 @@ app.post("/users", (req, res) => {
 });
 
 //allow users to update their username
-app.patch("/users/:username", (req, res) => {
-  //logic
-  res.status(201).send("Your username has been updated to " + req.params.username);
+app.patch("/users/:Name/:Username", (req, res) => {
+  let users = users.find((user) => {
+    return user.Name === req.params.Name
+  });
+
+  if (users) {
+    users.Name[req.params.Name] = parseInt(req.params.Username);
+    res.status(201).send("Your username has been updated to " + req.params.Username);
+  } else {
+    res.status(404).send("User " + req.params.Name + " was not found.");
+  }
 });
 
 //all users to add a movie to their list of favorites
