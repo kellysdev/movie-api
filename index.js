@@ -129,7 +129,7 @@ app.delete("/users/:Username/favorites/:Title", (req, res) => {
 });
 
 //allow existing users to deregister
-app.delete("/users", (req, res) => {
+app.delete("/users/:Username", (req, res) => {
   //logic
   res.status(200).send(req.params.username + " has been removed from [app name].");
 });
