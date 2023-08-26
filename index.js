@@ -3,7 +3,7 @@ const express = require("express"),
   url = require("url"),
   http = require("http"),
   morgan = require("morgan"),
-  bodyParser = require("boddy-parser");
+  bodyParser = require("body-parser");
 
 //declare variables
 const app = express();
