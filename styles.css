@@ -1,0 +1,28 @@
+table {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+thead {
+    text-align: left;
+}
+
+.request {
+    width: 20%;
+}
+
+.url .method{
+    width: 10%;
+}
+
+.req {
+    width: 30%;
+}
+
+.res {
+    width: 30%;
+}
+
+span {
+    color: midnightblue;
+}
