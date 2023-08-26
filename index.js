@@ -11,46 +11,37 @@ const app = express();
 //use body-parser
 app.use(bodyParser.json());
 
-let topMovies = [
+//create an "in-memory" array of objects
+let movies = [
   {
-	title: "Howl's Moving Castle",
-	genre: "Romance"
+	ImageURL: "https://www.imdb.com/title/tt0347149/mediaviewer/rm2848505089/?ref_=tt_ov_i",
+  Title: "Howl's Moving Castle",
+	Genre: "Fantasy",
+  Director: "Hayao Miyazaki"
   },
   {
-	title: "Princess Mononoke",
-	genre: "Action"
+  ImageURL: "https://www.imdb.com/title/tt0119698/mediaviewer/rm2697706753/?ref_=tt_ov_i",
+  Title: "Princess Mononoke",
+	Genre: "Action",
+  Director: "Hayao Miyazaki"
   },
   {
-    title: "Spirited Away",
-    genre: "Coming of Age"
+    ImageURL: "https://www.imdb.com/title/tt0245429/mediaviewer/rm4207852801/?ref_=tt_ov_i",
+    Title: "Spirited Away",
+    Genre: "Fantasy",
+    Director: "Hayao Miyazaki"
   },
   {
-    title: "The Secret World of Arriety",
-    genre: "Adventure"
+    ImageURL: "https://www.imdb.com/title/tt1517268/mediaviewer/rm2419599361/?ref_=tt_ov_i",
+    Title: "Barbie",
+    Genre: "Comedy",
+    Director: "Greta Gerwig"
   },
   {
-    title: "Castle in the Sky",
-    genre: "Fantasy"
-  },
-  {
-    title: "Nausicaa of the Valley of the Wind",
-    genre: "Fantasy"
-  },
-  {
-    title: "Grave of the Fireflies",
-    genre: "War"
-  },
-  {
-    title: "My Neighbor Totoro",
-    genre: "Children's"
-  },
-  {
-    title: "Kiki's Delivery Service",
-    genre: "Children's"
-  },
-  {
-    title: "Ponyo",
-    genre: "Children's"
+    ImageURL: "https://www.imdb.com/title/tt1160419/?ref_=nv_sr_srsg_0_tt_8_nm_0_q_dune",
+    Title: "Dune",
+    Genre: "Drama",
+    Director: "Denis Villeneuve"
   }
 ];
 
@@ -73,7 +64,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/movies", (req, res) => {
-  res.json(topMovies);
+  res.json(movies);
 });
 
 //error handling
