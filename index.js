@@ -119,11 +119,11 @@ app.patch("/users/:Name/:Username", (req, res) => {
 //all users to add a movie to their list of favorites
 app.post("/movies/:Title/add", (req, res) => {
   //click a button on a movie page to add to list?
-  res.status(201).send("This movie has been added to your list.");
+  res.status(201).send(req.params.Title + " has been added to your list.");
 });
 
 //allow users to remove a movie from their list of favorites
-app.delete("/favorites", (req, res) => {
+app.delete("/users/:Username/favorites/:Title", (req, res) => {
   //logic
   res.status(200).send(req.params.Title + " has been removed from your list.");
 });
