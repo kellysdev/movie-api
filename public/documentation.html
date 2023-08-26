@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
@@ -40,19 +41,19 @@
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a single movie.  Example:
-                        <p>
-                            {
-                                Image URL: "#",
-                                Title: "Howl's Moving Castle",
-                                Genre: {
-                                    "Romance",
-                                    "Fantasy"
-                                }
-                                Description: "description text here",
-                                Director: "Hayao Miyazaki",
-                                Featured: "Yes"
+                        <span><br>
+                            {<br>
+                            &emsp;Image URL: "#",<br>
+                            &emsp;Title: "Howl's Moving Castle",<br>
+                            &emsp;Genre: {<br>
+                            &emsp;&emsp;"Romance",<br>
+                            &emsp;&emsp;"Fantasy"<br>
+                            &emsp;}<br>
+                            &emsp;Description: "description text here",<br>
+                            &emsp;Director: "Hayao Miyazaki",<br>
+                            &emsp;Featured: "Yes"<br>
                             }
-                        </p>
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -61,16 +62,16 @@
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a genre.  Example:
-                        <p>
-                            {
-                                Genre: “Fantasy”,
-                                Description: “description text here”,
-                                Titles: {
-                                    “Howl’s Moving Castle”,
-                                    “Castle in the Sky”
-                                }
+                        <span><br>
+                            {<br>
+                            &emsp;Genre: “Fantasy”,<br>
+                            &emsp;Description: “description text here”,<br>
+                            &emsp;Titles: {<br>
+                            &emsp;&emsp;“Howl’s Moving Castle”,<br>
+                            &emsp;&emsp;“Castle in the Sky”<br>
+                            &emsp;}<br>
                             }
-                        </p>
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -79,18 +80,18 @@
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a director.  Example:
-                        <p>
-                            {
-                                Name: “Hayao Miyazaki”,
-                                Born: “1941”,
-                                Died: “-“,
-                                Bio: “biography text here”,
-                                Titles Directed: {
-                                    “Howl’s Moving Castle”,
-                                    “Castle in the Sky”
-                                }
+                        <span><br>
+                            {<br>
+                            &emsp;Name: “Hayao Miyazaki”,<br>
+                            &emsp;Born: “1941”,<br>
+                            &emsp;Died: “-“,<br>
+                            &emsp;Bio: “biography text here”,<br>
+                            &emsp;Titles Directed: {<br>
+                            &emsp;&emsp;“Howl’s Moving Castle”,<br>
+                            &emsp;&emsp;“Castle in the Sky”<br>
+                            &emsp;}<br>
                             }
-                        </p>
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -98,12 +99,12 @@
                     <td>/users</td>
                     <td>POST</td>
                     <td>A JSON object holding data about the user registering a new account.  Example:
-                        <p>
-                            {
-                                Name: “Kelly”,
-                                Username: “kellysmovies”
-                            }                            
-                        </p>
+                        <span><br>
+                            {<br>
+                            &emsp;Name: “Kelly”,<br>
+                            &emsp;Username: “kellysmovies”<br>
+                            }                        
+                        </span>
                     </td>
                     <td>A text message indicating that the user has successfully registered.</td>
                 </tr>
