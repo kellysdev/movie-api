@@ -14,16 +14,16 @@ app.use(bodyParser.json());
 //create an "in-memory" array of objects
 let movies = [
   {
-	ImageURL: "https://www.imdb.com/title/tt0347149/mediaviewer/rm2848505089/?ref_=tt_ov_i",
-  Title: "Howl's Moving Castle",
-	Genre: "Fantasy",
-  Director: "Hayao Miyazaki"
+    ImageURL: "https://www.imdb.com/title/tt0347149/mediaviewer/rm2848505089/?ref_=tt_ov_i",
+    Title: "Howl's Moving Castle",
+    Genre: "Fantasy",
+    Director: "Hayao Miyazaki"
   },
   {
-  ImageURL: "https://www.imdb.com/title/tt0119698/mediaviewer/rm2697706753/?ref_=tt_ov_i",
-  Title: "Princess Mononoke",
-	Genre: "Action",
-  Director: "Hayao Miyazaki"
+    ImageURL: "https://www.imdb.com/title/tt0119698/mediaviewer/rm2697706753/?ref_=tt_ov_i",
+    Title: "Princess Mononoke",
+    Genre: "Action",
+    Director: "Hayao Miyazaki"
   },
   {
     ImageURL: "https://www.imdb.com/title/tt0245429/mediaviewer/rm4207852801/?ref_=tt_ov_i",
@@ -63,9 +63,67 @@ app.get("/", (req, res) => {
   res.send("Welcome to my app!");
 });
 
+
+//return list of all movies
 app.get("/movies", (req, res) => {
   res.json(movies);
 });
+
+//return data for a single movie by title
+app.get("/movies/:Title", (req, res) => {
+  res.json(movies.find((movie) => 
+  { return movie.Title === req.params.Title }));
+});
+
+//return data about a genre by name/title
+app.get("/genres/:genre", (req,  res) => {
+  res.json(genres.find((genre) =>
+  { return genre.Genre === req.params.Genre }));
+});
+
+//return data about a director by name
+app.get("/directors/:name", (req, res) => {
+  res.json(directors.find((director) =>
+  { return directors.Name === req.params.Name }));
+});
+
+//allow usesrs to register
+app.post("/users", (req, res) => {
+  let newUser = req.body;
+
+  if(!newUser.name) {
+    const message = "Missing name in request body";
+    res.status(400).send(message);
+  } else {
+    users.push(newUser);
+    res.status(201).send(newUser);
+  }
+});
+
+//allow users to update their username
+app.patch("/users/:username", (req, res) => {
+  //logic
+  res.status(201).send("Your username has been updated to " + req.params.username);
+});
+
+//all users to add a movie to their list of favorites
+app.post("/movies/:Title/add", (req, res) => {
+  //click a button on a movie page to add to list?
+  res.status(201).send("This movie has been added to your list.");
+});
+
+//allow users to remove a movie from their list of favorites
+app.delete("/favorites", (req, res) => {
+  //logic
+  res.status(200).send(req.params.Title + " has been removed from your list.");
+});
+
+//allow existing users to deregister
+app.delete("/users", (req, res) => {
+  //logic
+  res.status(200).send(req.params.username + " has been removed from [app name].");
+});
+
 
 //error handling
 app.use((err, req, res, next) => {
