@@ -78,7 +78,7 @@ app.get("/movies/:Title", (req, res) => {
 });
 
 //return data about a genre by name/title
-app.get("/movies/:Genre", (req,  res) => {
+app.get("/movies/:Genre", (req, res) => {
   res.json(movies.find((movie) =>
   { return movie.Genre === req.params.Genre }));
 });
@@ -103,7 +103,7 @@ app.post("/users", (req, res) => {
 });
 
 //allow users to update their username
-app.patch("/users/:Name/:Username", (req, res) => {
+app.post("/users/:Name/:Username", (req, res) => {
   let users = users.find((user) => {
     return user.Name === req.params.Name
   });
