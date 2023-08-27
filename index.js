@@ -89,16 +89,16 @@ app.get("/movies/:Director", (req, res) => {
   { return movie.Director === req.params.Director }));
 });
 
-//allow usesrs to register
+//allow users to register
 app.post("/users", (req, res) => {
   let newUser = req.body;
 
-  if (!newUser.name) {
+  if (!newUser.Name) {
     const message = "Missing name in request body";
     res.status(400).send(message);
   } else {
     users.push(newUser);
-    res.status(201).send(newUser);
+    res.status(201).send(newUser.Name + " has been registered to myflix.");
   }
 });
 
@@ -131,7 +131,7 @@ app.delete("/users/:Username/favorites/:Title", (req, res) => {
 //allow existing users to deregister
 app.delete("/users/:Username", (req, res) => {
   //logic
-  res.status(200).send(req.params.username + " has been removed from [app name].");
+  res.status(200).send(req.params.Username + " has been removed from myflix.");
 });
 
 
