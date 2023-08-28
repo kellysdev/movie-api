@@ -90,7 +90,7 @@ app.get("/movies/:Director", (req, res) => {
 });
 
 //allow users to register
-app.post("/users", (req, res) => {
+app.post("/users/:Name/:Username", (req, res) => {
   let newUser = req.body;
 
   if (!newUser.Name) {
@@ -129,7 +129,7 @@ app.delete("/users/:Username/favorites/:Title", (req, res) => {
 });
 
 //allow existing users to deregister
-app.delete("/users/:Username", (req, res) => {
+app.delete("/users/:Name/:Username", (req, res) => {
   //logic
   res.status(200).send(req.params.Username + " has been removed from myflix.");
 });
