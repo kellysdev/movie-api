@@ -124,8 +124,16 @@ app.post("/movies/:Title/add", (req, res) => {
 
 //allow users to remove a movie from their list of favorites
 app.delete("/users/:Username/favorites/:Title", (req, res) => {
-  //logic
-  res.status(200).send(req.params.Title + " has been removed from your list.");
+  let users = users.find((user) => {
+    return user.Username === req.params.Username
+  });
+
+  if (users) {
+    users.Username[req.params.Username] = parseInt(req.params.Title);
+    res.status(200).send(req.params.Title + " has been removed from your list.");
+  } else {
+    res.status(404).send("Title " + req.params.Title + " was not found.");
+  }
 });
 
 //allow existing users to deregister
