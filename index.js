@@ -103,7 +103,7 @@ app.post("/users/:Name/:Username", (req, res) => {
 });
 
 //allow users to update their username
-app.post("/users/:Name/:Username", (req, res) => {
+app.post("/users/:Name/Username", (req, res) => {
   let users = users.find((user) => {
     return user.Name === req.params.Name
   });
