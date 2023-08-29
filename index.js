@@ -76,13 +76,13 @@ app.get("/movies/:Title", (req, res) => {
   { return movie.Title === req.params.Title }));
 });
 
-//return data about a genre by name/title
+//return data about a genre by name/title             <-
 app.get("/movies/:Genre", (req, res) => {
   res.json(movies.find((movie) =>
   { return movie.Genre === req.params.Genre }));
 });
 
-//return data about a director by name
+//return data about a director by name                <-
 app.get("/movies/:Director", (req, res) => {
   res.json(movies.find((movie) =>
   { return movie.Director === req.params.Director }));
@@ -90,13 +90,13 @@ app.get("/movies/:Director", (req, res) => {
 
 //allow users to register
 app.post("/users", (req, res) => {
-  // let newUser = req.body;
+  let newUser = req.body;
   res.send(JSON.stringify(newUser) + " has been registered to myflix.");
 });
 
-//allow users to update their username
+//allow users to update their username                <-
 app.post("/users/:Name/:Username", (req, res) => {
-  res.status(201).send("Your username has been updated to " + req.params.Username);
+  res.status(201).send("Your username has been updated.");
 });
 
 //all users to add a movie to their list of favorites
