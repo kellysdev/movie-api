@@ -65,7 +65,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to my app!");
 });
 
-
 //return list of all movies
 app.get("/movies", (req, res) => {
   res.json(movies);
@@ -90,58 +89,30 @@ app.get("/movies/:Director", (req, res) => {
 });
 
 //allow users to register
-app.post("/users/:Name/:Username", (req, res) => {
-  let newUser = req.body;
-
-  if (!newUser.Name) {
-    const message = "Missing name in request body";
-    res.status(400).send(message);
-  } else {
-    users.push(newUser);
-    res.status(201).send(newUser.Name + " has been registered to myflix.");
-  }
+app.post("/users", (req, res) => {
+  // let newUser = req.body;
+  res.send(JSON.stringify(newUser) + " has been registered to myflix.");
 });
 
 //allow users to update their username
-app.post("/users/:Name/Username", (req, res) => {
-  let users = users.find((user) => {
-    return user.Name === req.params.Name
-  });
-
-  if (users) {
-    users.Name[req.params.Name] = parseInt(req.params.Username);
-    res.status(201).send("Your username has been updated to " + req.params.Username);
-  } else {
-    res.status(404).send("User " + req.params.Name + " was not found.");
-  }
+app.post("/users/:Name/:Username", (req, res) => {
+  res.status(201).send("Your username has been updated to " + req.params.Username);
 });
 
 //all users to add a movie to their list of favorites
 app.post("/movies/:Title/add", (req, res) => {
-  //click a button on a movie page to add to list?
   res.status(201).send(req.params.Title + " has been added to your list.");
 });
 
 //allow users to remove a movie from their list of favorites
-app.delete("/users/:Username/favorites/:Title", (req, res) => {
-  let users = users.find((user) => {
-    return user.Username === req.params.Username
-  });
-
-  if (users) {
-    users.Username[req.params.Username] = parseInt(req.params.Title);
-    res.status(200).send(req.params.Title + " has been removed from your list.");
-  } else {
-    res.status(404).send("Title " + req.params.Title + " was not found.");
-  }
+app.delete("/users/:Name/list/:Title", (req, res) => {
+  res.status(200).send(req.params.movie + " has been removed from your list.");
 });
 
 //allow existing users to deregister
 app.delete("/users/:Name/:Username", (req, res) => {
-  //logic
   res.status(200).send(req.params.Username + " has been removed from myflix.");
 });
-
 
 //error handling
 app.use((err, req, res, next) => {
