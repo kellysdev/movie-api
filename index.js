@@ -98,6 +98,18 @@ app.get("/movies/:Director", (req, res) => {
   { return movie.Director === req.params.Director }));
 });
 
+  //return all users
+app.get("/users", async (req, res) => {
+  await Users.find()
+  .then((users) => {
+    res.status(201).json(users);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error " = err);
+  });
+});
+
   //allow users to register
 app.post("/users", async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
