@@ -137,6 +137,18 @@ app.post("/users", async (req, res) => {
   });
 });
 
+  //return user by username
+app.get("/users/:Username", async (req, res) => {
+  await Users.findOne({ Username: req.params.Username })
+  .then((user) => {
+    res.json(user);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
   //allow users to update their username                <-
 app.post("/users/:Name/:Username", (req, res) => {
   res.status(201).send("Your username has been updated.");
