@@ -21,42 +21,6 @@ const Users = Models.User;
 //connect to MongoDB database movies from task 2.7
 mongoose.connect("mongodb://localhost:27017/movies", {useNewUrlParser: true, useUnifiedTopology: true});
 
-//create an "in-memory" array of objects
-// let movies = [
-//   {
-//     ImageURL: "https://www.imdb.com/title/tt0347149/mediaviewer/rm2848505089/?ref_=tt_ov_i",
-//     Title: "Howl's Moving Castle",
-//     Genre: "Fantasy",
-//     Director: "Hayao Miyazaki"
-//   },
-//   {
-//     ImageURL: "https://www.imdb.com/title/tt0119698/mediaviewer/rm2697706753/?ref_=tt_ov_i",
-//     Title: "Princess Mononoke",
-//     Genre: "Action",
-//     Director: "Hayao Miyazaki"
-//   },
-//   {
-//     ImageURL: "https://www.imdb.com/title/tt0245429/mediaviewer/rm4207852801/?ref_=tt_ov_i",
-//     Title: "Spirited Away",
-//     Genre: "Fantasy",
-//     Director: "Hayao Miyazaki"
-//   },
-//   {
-//     ImageURL: "https://www.imdb.com/title/tt1517268/mediaviewer/rm2419599361/?ref_=tt_ov_i",
-//     Title: "Barbie",
-//     Genre: "Comedy",
-//     Director: "Greta Gerwig"
-//   },
-//   {
-//     ImageURL: "https://www.imdb.com/title/tt1160419/?ref_=nv_sr_srsg_0_tt_8_nm_0_q_dune",
-//     Title: "Dune",
-//     Genre: "Drama",
-//     Director: "Denis Villeneuve"
-//   }
-// ];
-
-let users = [];
-
 //create server
 http.createServer((request, response) => {
   let addr = request.url;
