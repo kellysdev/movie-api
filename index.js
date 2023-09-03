@@ -3,10 +3,14 @@ const express = require("express"),
   url = require("url"),
   http = require("http"),
   morgan = require("morgan"),
-  bodyParser = require("body-parser");
+  bodyParser = require("body-parser"),
+  mongoose = require("mongoose");
 
 //declare variables
 const app = express();
+
+const Movies = Models.Moviel;
+const Users = Models.User;
 
 //use body-parser
 app.use(bodyParser.json());
