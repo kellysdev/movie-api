@@ -99,9 +99,30 @@ app.get("/movies/:Director", (req, res) => {
 });
 
   //allow users to register
-app.post("/users", (req, res) => {
-  let newUser = req.body;
-  res.send(JSON.stringify(newUser) + " has been registered to myflix.");
+app.post("/users", async (req, res) => {
+  await Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + "already exists");
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) => {res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send("Error: " + error);
+        })
+      }
+    })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send("Error: " + error);
+  });
 });
 
   //allow users to update their username                <-
