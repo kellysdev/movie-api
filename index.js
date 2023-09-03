@@ -12,6 +12,7 @@ const app = express();
 
 //use body-parser
 app.use(bodyParser.json());
+app.use(express.urlencoded({extended: true}));
 
 //import mongoose models
 const Movies = Models.Moviel;
@@ -74,51 +75,51 @@ app.get("/", (req, res) => {
   res.send("Welcome to my app!");
 });
 
-//return list of all movies
+  //return list of all movies
 app.get("/movies", (req, res) => {
   res.json(movies);
 });
 
-//return data for a single movie by title
+  //return data for a single movie by title
 app.get("/movies/:Title", (req, res) => {
   res.json(movies.find((movie) => 
   { return movie.Title === req.params.Title }));
 });
 
-//return data about a genre by name/title             <-
+  //return data about a genre by name/title             <-
 app.get("/movies/:Genre", (req, res) => {
   res.json(movies.find((movie) =>
   { return movie.Genre === req.params.Genre }));
 });
 
-//return data about a director by name                <-
+  //return data about a director by name                <-
 app.get("/movies/:Director", (req, res) => {
   res.json(movies.find((movie) =>
   { return movie.Director === req.params.Director }));
 });
 
-//allow users to register
+  //allow users to register
 app.post("/users", (req, res) => {
   let newUser = req.body;
   res.send(JSON.stringify(newUser) + " has been registered to myflix.");
 });
 
-//allow users to update their username                <-
+  //allow users to update their username                <-
 app.post("/users/:Name/:Username", (req, res) => {
   res.status(201).send("Your username has been updated.");
 });
 
-//all users to add a movie to their list of favorites
+  //all users to add a movie to their list of favorites
 app.post("/movies/:Title/add", (req, res) => {
   res.status(201).send(req.params.Title + " has been added to your list.");
 });
 
-//allow users to remove a movie from their list of favorites
+  //allow users to remove a movie from their list of favorites
 app.delete("/users/:Name/list/:Title", (req, res) => {
   res.status(200).send(req.params.movie + " has been removed from your list.");
 });
 
-//allow existing users to deregister
+  //allow existing users to deregister
 app.delete("/users/:Name/:Username", (req, res) => {
   res.status(200).send(req.params.Username + " has been removed from myflix.");
 });
