@@ -4,7 +4,8 @@ const express = require("express"),
   http = require("http"),
   morgan = require("morgan"),
   bodyParser = require("body-parser"),
-  mongoose = require("mongoose");
+  mongoose = require("mongoose"),
+  Models = require("./models.js");
 
 //declare variables
 const app = express();
