@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
 //import mongoose models
-const Movies = Models.Moviel;
+const Movies = Models.Movie;
 const Users = Models.User;
 
 //connect to MongoDB database movies from task 2.7
@@ -40,8 +40,15 @@ app.get("/", (req, res) => {
 });
 
   //return list of all movies
-app.get("/movies", (req, res) => {
-  res.json(movies);
+app.get("/movies", async (req, res) => {
+  await Movies.find()
+  .then((movies) => {
+    res.status(201).json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
   //return data for a single movie by title
@@ -113,7 +120,7 @@ app.get("/users/:Username", async (req, res) => {
   });
 });
 
-  //allow users to update their username
+  //allow users to update their username                <-
 app.put("/users/:Username", async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username },
     {$set: {
