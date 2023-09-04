@@ -113,9 +113,24 @@ app.get("/users/:Username", async (req, res) => {
   });
 });
 
-  //allow users to update their username                <-
-app.post("/users/:Name/:Username", (req, res) => {
-  res.status(201).send("Your username has been updated.");
+  //allow users to update their username
+app.put("/users/:Username", async (req, res) => {
+  await Users.findOneAndUpdate({ Username: req.params.Username },
+    {$set: {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }) // this line returns the updated document
+  .then((updatedUser) => {
+    res.json(updatedUser);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  })
 });
 
   //all users to add a movie to their list of favorites
