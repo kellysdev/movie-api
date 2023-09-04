@@ -52,9 +52,15 @@ app.get("/movies", async (req, res) => {
 });
 
   //return data for a single movie by title
-app.get("/movies/:Title", (req, res) => {
-  res.json(movies.find((movie) => 
-  { return movie.Title === req.params.Title }));
+app.get("/movies/:Title", async (req, res) => {
+  await Movies.findOne({ Title: req.params.Tile })
+  .then((movie) => {
+    res.status(201).json(movie);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
   //return data about a genre by name/title             <-
