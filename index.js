@@ -95,8 +95,9 @@ app.post("/users", (req, res) => {
 });
 
 //allow users to update their username                <-
-app.post("/users/:Name/:Username", (req, res) => {
-  res.status(201).send("Your username has been updated.");
+app.put("/users/:Username", (req, res) => {
+  let newUsername = req.body.Username;
+  res.status(201).send("Your username has been updated to " + newUsername);
 });
 
 //all users to add a movie to their list of favorites
