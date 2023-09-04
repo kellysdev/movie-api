@@ -65,7 +65,7 @@ app.get("/movies/:Title", async (req, res) => {
 
   //return data about a genre by name             <-
 app.get("/movies/Genre/:Name", async (req, res) => {
-  await Movies.findOne({ Genre: req.params.Genre })
+  await Movies.findOne({ "Genre.Name": req.params.Name })
   .then((movie) => {
     res.status(201).json(movie);
   })
@@ -77,7 +77,7 @@ app.get("/movies/Genre/:Name", async (req, res) => {
 
   //return data about a director by name                <-
 app.get("/movies/Director/:Name", async (req, res) => {
-  await Movies.findOne({ Director: req.params.Director })
+  await Movies.findOne({ "Director.Name": req.params.Name })
   .then((movie) => {
     res.status(201).json(movie);
   })
