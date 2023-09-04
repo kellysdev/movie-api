@@ -63,16 +63,28 @@ app.get("/movies/:Title", async (req, res) => {
   });
 });
 
-  //return data about a genre by name/title             <-
-app.get("/movies/:Genre", (req, res) => {
-  res.json(movies.find((movie) =>
-  { return movie.Genre === req.params.Genre }));
+  //return data about a genre by name             <-
+app.get("/movies/Genre/:Name", async (req, res) => {
+  await Movies.findOne({ Genre: req.params.Genre })
+  .then((movie) => {
+    res.status(201).json(movie);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
   //return data about a director by name                <-
-app.get("/movies/:Director", (req, res) => {
-  res.json(movies.find((movie) =>
-  { return movie.Director === req.params.Director }));
+app.get("/movies/Director/:Name", async (req, res) => {
+  await Movies.findOne({ Director: req.params.Director })
+  .then((movie) => {
+    res.status(201).json(movie);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
   //return all users
