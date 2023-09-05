@@ -63,7 +63,7 @@ app.get("/movies/:Title", async (req, res) => {
   });
 });
 
-  //return data about a genre by name             <-
+  //return data about a genre by name
 app.get("/movies/Genre/:Name", async (req, res) => {
   await Movies.findOne({ "Genre.Name": req.params.Name })
   .then((movie) => {
@@ -75,7 +75,7 @@ app.get("/movies/Genre/:Name", async (req, res) => {
   });
 });
 
-  //return data about a director by name                <-
+  //return data about a director by name
 app.get("/movies/Director/:Name", async (req, res) => {
   await Movies.findOne({ "Director.Name": req.params.Name })
   .then((movie) => {
@@ -138,7 +138,7 @@ app.get("/users/:Username", async (req, res) => {
   });
 });
 
-  //allow users to update their username                <-
+  //allow users to update their info
 app.put("/users/:Username", async (req, res) => {
   await Users.findOneAndUpdate({ Username: req.params.Username },
     {$set: {
