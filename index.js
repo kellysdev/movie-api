@@ -53,7 +53,7 @@ app.get("/movies", async (req, res) => {
 
   //return data for a single movie by title
 app.get("/movies/:Title", async (req, res) => {
-  await Movies.findOne({ Title: req.params.Tile })
+  await Movies.findOne({ Title: req.params.Title })
   .then((movie) => {
     res.status(201).json(movie);
   })
