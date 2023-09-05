@@ -43,11 +43,19 @@
                     <td>A JSON object holding data about a single movie.  Example:
                         <span><br>
                             {<br>
-                            &emsp;Image URL: "#",<br>
                             &emsp;Title: "Howl's Moving Castle",<br>
-                            &emsp;Genre: "Fantasy"<br>
                             &emsp;Description: "description text here",<br>
-                            &emsp;Director: "Hayao Miyazaki",<br>
+                            &emsp;Genre: {<br>
+                            &emsp;&emsp;Name: "Fantasy"<br>
+                            &emsp;&emsp;Description: "description text here"<br>
+                            &emsp;}<br>
+                            &emsp;Director: {<br>
+                            &emsp;&emsp;Name: "Hayao Miyazaki",<br>
+                            &emsp;&emsp;Bio: "bio text here",<br>
+                            &emsp;&emsp;Birth: "date"<br>
+                            &emsp;}<br>
+                            &emsp;Actors: ["two featured actors"],<br>
+                            &emsp;ImagePath: "howlsmovingcastle.png"<br>
                             &emsp;Featured: "Yes"<br>
                             }
                         </span>
@@ -55,38 +63,29 @@
                 </tr>
                 <tr>
                     <td>Return Data About a Genre</td>
-                    <td>/movies/[Genre]</td>
+                    <td>/movies/Genre<br>/[Name]</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a genre.  Example:
                         <span><br>
                             {<br>
                             &emsp;Genre: “Fantasy”,<br>
-                            &emsp;Description: “description text here”,<br>
-                            &emsp;Titles: {<br>
-                            &emsp;&emsp;“Howl’s Moving Castle”,<br>
-                            &emsp;&emsp;“Castle in the Sky”<br>
-                            &emsp;}<br>
+                            &emsp;Description: “description text here”<br>
                             }
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td>Return Data About a Director</td>
-                    <td>/movies/[Director]</td>
+                    <td>/movies/Director<br>/[Name]</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a director.  Example:
                         <span><br>
                             {<br>
                             &emsp;Name: “Hayao Miyazaki”,<br>
-                            &emsp;Born: “1941”,<br>
-                            &emsp;Died: “-“,<br>
                             &emsp;Bio: “biography text here”,<br>
-                            &emsp;Titles Directed: {<br>
-                            &emsp;&emsp;“Howl’s Moving Castle”,<br>
-                            &emsp;&emsp;“Castle in the Sky”<br>
-                            &emsp;}<br>
+                            &emsp;Birth: "date"
                             }
                         </span>
                     </td>
@@ -98,37 +97,48 @@
                     <td>A JSON object holding data about the user registering a new account.  Example:
                         <span><br>
                             {<br>
-                            &emsp;Name: “Kelly”,<br>
-                            &emsp;Username: “kellysmovies”<br>
-                            }                        
+                            &emsp;Username: "Kelly",<br>
+                            &emsp;Password: "postgres,"<br>
+                            &emsp;Email: "kellys@mail.com",<br>
+                            &emsp;Birthday: "1990-09-09"<br>
+                            }
                         </span>
                     </td>
                     <td>A text message indicating that the user has successfully registered.</td>
                 </tr>
                 <tr>
                     <td>Allow Users to Update Their Username</td>
-                    <td>/users/[Name]/[username]</td>
-                    <td>PATCH</td>
-                    <td>None</td>
+                    <td>/users/[username]</td>
+                    <td>PUT</td>
+                    <td>A JSON file holding data to update the user information.  Example:<br>
+                        <span>
+                            {<br>
+                            &emsp;Username: "Kelly",<br>
+                            &emsp;Password: "postgres,"<br>
+                            &emsp;Email: "kellys@mail.com",<br>
+                            &emsp;Birthday: "1990-09-09"<br>
+                            }
+                        </span>
+                    </td>
                     <td>A text message indicating that the user has successfully updated their username.</td>
                 </tr>
                 <tr>
                     <td>Allow Users to Add a Movie to their Favorites List</td>
-                    <td>/movies/[Title]/add</td>
+                    <td>/users/[Username]<br>/movies/[MovieID]</td>
                     <td>POST</td>
-                    <td>A JSON object?</td>
-                    <td></td>
+                    <td>None</td>
+                    <td>A text message showing that the movie has successfully been added to their list of favorite movies.</td>
                 </tr>
                 <tr>
                     <td>Allow Users to Remove a Movie from their List</td>
-                    <td>/users/[Name]<br>/list/[Title]</td>
+                    <td>/users/[Username]<br>/movies/[MovieID]<br></td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message indicating that the user has successfully deleted a movie from their list of favorites.</td>
                 </tr>
                 <tr>
                     <td>Allow Users to Deregister</td>
-                    <td>/users/[Name]/[Username]</td>
+                    <td>/users/[Username]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message indicating that the user has successfully deregistered their account.</td>
