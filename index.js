@@ -77,13 +77,13 @@ app.get("/movies/:Title", (req, res) => {
 });
 
 //return data about a genre by name/title             <-
-app.get("/movies/:Genre", (req, res) => {
+app.get("/movies/Genre/:Genre", (req, res) => {
   res.json(movies.find((movie) =>
   { return movie.Genre === req.params.Genre }));
 });
 
 //return data about a director by name                <-
-app.get("/movies/:Director", (req, res) => {
+app.get("/movies/Director/:Director", (req, res) => {
   res.json(movies.find((movie) =>
   { return movie.Director === req.params.Director }));
 });
