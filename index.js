@@ -19,7 +19,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 //connect to MongoDB database movies from task 2.7
-mongoose.connect("mongodb://127.0.0.1:27017/movies", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://127.0.0.1:27017/test", {useNewUrlParser: true, useUnifiedTopology: true});
 
 //create server
 http.createServer((request, response) => {
