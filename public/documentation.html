@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td>Return Data About a Genre</td>
-                    <td>/movies/[Genre]</td>
+                    <td>/movies/Genre<br>/[Genre]</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a genre.  Example:
@@ -73,7 +73,7 @@
                 </tr>
                 <tr>
                     <td>Return Data About a Director</td>
-                    <td>/movies/[Director]</td>
+                    <td>/movies/Director<br>/[Director]</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about a director.  Example:
@@ -107,8 +107,8 @@
                 </tr>
                 <tr>
                     <td>Allow Users to Update Their Username</td>
-                    <td>/users/[Name]/[username]</td>
-                    <td>PATCH</td>
+                    <td>/users/[Username]</td>
+                    <td>PUT</td>
                     <td>None</td>
                     <td>A text message indicating that the user has successfully updated their username.</td>
                 </tr>
