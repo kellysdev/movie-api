@@ -19,7 +19,7 @@ let auth = require("./auth")(app);
 
 //import passport module and local file
 const passport = require("passport");
-require("./passport.js");
+require("./passport");
 
 //import mongoose models
 const Movies = Models.Movie;
