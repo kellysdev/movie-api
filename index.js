@@ -14,6 +14,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
+//link authentication
+let auth = require("./auth")(app);
+
 //import mongoose models
 const Movies = Models.Movie;
 const Users = Models.User;
