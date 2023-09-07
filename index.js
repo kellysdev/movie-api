@@ -14,8 +14,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
-//link authentication
+//import authentication local file
 let auth = require("./auth")(app);
+
+//import passport module and local file
+const passport = require("passport");
+require("./passport.js");
 
 //import mongoose models
 const Movies = Models.Movie;
