@@ -14,6 +14,21 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
+//import cors
+const cors = require("cors");
+app.use(cors()); //replace this with let allowedOrigins = ["http://localhost:8080", ]
+
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if(!origin) return callback (null, true);
+//     if(allowedOrigins.indexof(origin) === -1) {
+//       let message = "The CORS policy for this application doesn't allow access from origin " + origin;
+//       return callback(new Error(message ), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
+
 //import authentication local file
 let auth = require("./auth")(app);
 
