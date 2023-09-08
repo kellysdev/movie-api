@@ -26,10 +26,12 @@ let userSchema = mongoose.Schema({
     FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }]
 });
 
+//hashes the password registered with a user (using 10 salt rounds?)
 userSchema.statics.hashPassword = (password) => {
     return bcrypt.hashSync(password, 10);
 };
 
+//compares the user password (this.password) with the input password (function parameter password)
 userSchema.methods.validatePassword = function(password) {
     return bcrypt.comparesSync(password, this.Password);
 };
