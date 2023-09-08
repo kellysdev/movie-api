@@ -175,7 +175,7 @@ app.post("/users/:Username/movies/:MovieID", passport.authenticate("jwt", { sess
     {$push: {FavoriteMovies: req.params.MovieID }},
     {new: true})
   .then((updatedUser) => {
-    res.json(updatedUser);
+    res.status(200).send("This movie has been added to your list.");
   })
   .catch((err) => {
     console.error(err);
@@ -189,7 +189,7 @@ app.delete("/users/:Username/movies/:MovieID", passport.authenticate("jwt", { se
     {$pull: {FavoriteMovies: req.params.MovieID }},
     {new: true})
   .then((updatedUser) => {
-    res.json(updatedUser);
+    res.status(200).send("This movie has been removed from your list.");
   })
   .catch((err) => {
     console.error(err);
