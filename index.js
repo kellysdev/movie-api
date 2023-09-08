@@ -5,7 +5,8 @@ const express = require("express"),
   morgan = require("morgan"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
-  Models = require("./models.js");
+  Models = require("./models.js"),
+  bcrypt = require("bcrypt");
 
 //declare variables
 const app = express();
