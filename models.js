@@ -27,7 +27,7 @@ let userSchema = mongoose.Schema({
 });
 
 //hashes the password registered with a user (using 10 salt rounds?)
-userSchema.statics.hashPassword = (password) => {
+userSchema.statics.hashPassword = (password) => { //statics allows the function to act on the model itself
     return bcrypt.hashSync(password, 10);
 };
 
