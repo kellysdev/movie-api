@@ -20,7 +20,9 @@ app.use(express.urlencoded({extended: true}));
 
 //import cors
 const cors = require("cors");
-app.use(cors()); //replace this with let allowedOrigins = ["http://localhost:8080", ]
+app.use(cors()); //allows all domains - to restrict, replace this with:
+
+//let allowedOrigins = ["http://localhost:8080", ]
 
 // app.use(cors({
 //   origin: (origin, callback) => {
