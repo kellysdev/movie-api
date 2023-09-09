@@ -152,6 +152,7 @@ app.post("/users", async (req, res) => {
 
   //return user by username
 app.get("/users/:Username", passport.authenticate("jwt", { session: false}), async (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   await Users.findOne({ Username: req.params.Username })
   .then((user) => {
     res.json(user);
@@ -168,6 +169,7 @@ app.put("/users/:Username", passport.authenticate("jwt", { session: false}), asy
   if(req.user.Username !== req.params.Username) {
     return res.status(400).send("Permission denied");
   }
+  let hashedPassword = Users.hashPassword(req.body.Password);
   await Users.findOneAndUpdate({ Username: req.params.Username },
     {$set: {
       Username: req.body.Username,
