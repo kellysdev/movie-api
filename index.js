@@ -8,6 +8,9 @@ const express = require("express"),
   Models = require("./models.js"),
   bcrypt = require("bcrypt");
 
+//import express-validator
+const { check, validationResult } = require("express-validator");
+
 //declare variables
 const app = express();
 
