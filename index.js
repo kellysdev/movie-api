@@ -124,6 +124,7 @@ app.get("/users", passport.authenticate("jwt", { session: false}), async (req, r
 
   //allow users to register
 app.post("/users", async (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
