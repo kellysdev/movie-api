@@ -132,9 +132,9 @@ app.get("/users", passport.authenticate("jwt", { session: false}), async (req, r
   //allow users to register
 app.post("/users", 
 [ check("Username", "Username is required").isLength({min: 5}),
-  check("Username", "Username contains non alphanumeric characters - not allowed").isAlphanumeric,
-  check("Password", "Password is required").not().isEmpty,
-  check("Email", "Email does not appear to be valid").isEmail
+  check("Username", "Username contains non alphanumeric characters - not allowed").isAlphanumeric(),
+  check("Password", "Password is required").not().isEmpty(),
+  check("Email", "Email does not appear to be valid").isEmail()
 ], async (req, res) => {
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -182,9 +182,9 @@ app.get("/users/:Username", passport.authenticate("jwt", { session: false}), asy
   //allow users to update their info
 app.put("/users/:Username", passport.authenticate("jwt", { session: false}), 
 [ check("Username", "Username is required").isLength({min: 5}),
-  check("Username", "Username contains non alphanumeric characters - not allowed").isAlphanumeric,
-  check("Password", "Password is required").not().isEmpty,
-  check("Email", "Email does not appear to be valid").isEmail
+  check("Username", "Username contains non alphanumeric characters - not allowed").isAlphanumeric(),
+  check("Password", "Password is required").not().isEmpty(),
+  check("Email", "Email does not appear to be valid").isEmail()
 ], async (req, res) => {
   //condition: check username first
   if(req.user.Username !== req.params.Username) {
