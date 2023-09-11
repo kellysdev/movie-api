@@ -7,7 +7,7 @@ const express = require("express"),
   mongoose = require("mongoose"),
   Models = require("./models.js"),
   bcrypt = require("bcrypt"),
-  dotenv = require("dotenv");
+  dotenv = require("dotenv").config();
 
 //import express-validator
 const { check, validationResult } = require("express-validator");
