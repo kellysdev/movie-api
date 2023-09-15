@@ -66,7 +66,7 @@ app.use(express.static("public"));
 
 //request routing
 app.get("/", (req, res) => {
-  res.send("Welcome to my app!");
+  res.send("Welcome to Popopolis!");
 });
 
   //return list of all movies
