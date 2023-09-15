@@ -34,7 +34,7 @@ userSchema.statics.hashPassword = (password) => { //statics allows the function 
 
 //compares the user password (this.password) with the input password (function parameter password)
 userSchema.methods.validatePassword = function(password) {
-    return bcrypt.comparesSync(password, this.Password);
+    return bcrypt.compareSync(password, this.Password);
 };
 
 let Movie = mongoose.model("Movie", movieSchema);
