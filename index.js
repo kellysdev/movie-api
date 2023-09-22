@@ -21,7 +21,7 @@ app.use(express.urlencoded({extended: true}));
 
 //import cors
 const cors = require("cors");
-app.use(cors()); //allows all domains - to restrict, replace this with:
+app.use(cors()); //allows all domains - to restrict, replace this (& allowedOrigins below) with:
 
 //let allowedOrigins = ["http://localhost:8080", ]
 
@@ -51,13 +51,6 @@ const Users = Models.User;
 // mongoose.connect("mongodb://127.0.0.1:27017/test", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
-//create server
-http.createServer((request, response) => {
-  let addr = request.url;
-  q = url.parse(addr, true);
-  filePath = "";
-});
-
 //setup the logger
 app.use(morgan("common"));
 
@@ -70,8 +63,8 @@ app.get("/", (req, res) => {
 });
 
   //return list of all movies
-app.get("/movies", passport.authenticate("jwt", { session: false }), async (req, res) => {
-  await Movies.find()
+app.get("/movies", passport.authenticate("jwt", { session: false }), (req, res) => {
+  Movies.find()
   .then((movies) => {
     res.status(201).json(movies);
   })
@@ -168,7 +161,6 @@ app.post("/users",
 
   //return user by username
 app.get("/users/:Username", passport.authenticate("jwt", { session: false}), async (req, res) => {
-  let hashedPassword = Users.hashPassword(req.body.Password);
   await Users.findOne({ Username: req.params.Username })
   .then((user) => {
     res.json(user);
