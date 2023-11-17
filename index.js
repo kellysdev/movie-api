@@ -21,20 +21,24 @@ app.use(express.urlencoded({extended: true}));
 
 //import cors
 const cors = require("cors");
-app.use(cors()); //allows all domains - to restrict, replace this (& allowedOrigins below) with:
+//allows all domains:
+app.use(cors()); 
 
-//let allowedOrigins = ["http://localhost:8080", ]
+// to restrict, replace this (& allowedOrigins below) with:
 
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     if(!origin) return callback (null, true);
-//     if(allowedOrigins.indexof(origin) === -1) {
-//       let message = "The CORS policy for this application doesn't allow access from origin " + origin;
-//       return callback(new Error(message ), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
+let allowedOrigins = ["http://localhost:8080/", "http://localhost:1234/", 
+  "https://popopolis.netlify.app/"]
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback (null, true);
+    if(allowedOrigins.indexof(origin) === -1) {
+      let message = "The CORS policy for this application doesn't allow access from origin " + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 //import authentication local file
 let auth = require("./auth")(app);
