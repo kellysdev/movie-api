@@ -255,8 +255,12 @@ app.delete("/users/:Username", passport.authenticate("jwt", { session: false}), 
 
 //error handling
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
+  if (req.xhr) {
+    console.error(err.stack);
+    res.status(500).send("Express error:" + err);
+  } else {
+    next(err);
+  }
 });
 
 //listen
