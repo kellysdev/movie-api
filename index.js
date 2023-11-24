@@ -26,8 +26,8 @@ app.use(cors());
 
 // to restrict, replace this (& allowedOrigins below) with:
 
-let allowedOrigins = ["http://localhost:8080/", "http://localhost:1234/", 
-  "https://popopolis.netlify.app/"]
+let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", 
+  "https://popopolis.netlify.app"]
 
 app.use(cors({
   origin: (origin, callback) => {
