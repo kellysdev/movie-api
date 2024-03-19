@@ -23,22 +23,19 @@ app.use(express.urlencoded({extended: true}));
 const cors = require("cors");
 //allows all domains:
 app.use(cors()); 
-
-// to restrict, replace this (& allowedOrigins below) with:
-
-let allowedOrigins = ["*", "http://localhost:8080", "http://localhost:1234", "http://localhost:4200",
-  "https://popopolis.netlify.app", "https://kellysdev.github.io/movie-Angular-client", "https://kellysdev.github.io"]
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if(!origin) return callback (null, true);
-    if(allowedOrigins.indexOf(origin) === -1) {
-      let message = "The CORS policy for this application doesn't allow access from origin " + origin;
-      return callback(new Error(message ), false);
-    }
-    return callback(null, true);
-  }
-}));
+// to restrict, replace with:
+// let allowedOrigins = ["*", "http://localhost:8080", "http://localhost:1234", "http://localhost:4200",
+//   "https://popopolis.netlify.app", "https://kellysdev.github.io/movie-Angular-client", "https://kellysdev.github.io"]
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if(!origin) return callback (null, true);
+//     if(allowedOrigins.indexOf(origin) === -1) {
+//       let message = "The CORS policy for this application doesn't allow access from origin " + origin;
+//       return callback(new Error(message ), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
 
 //import authentication local file
 let auth = require("./auth")(app);
