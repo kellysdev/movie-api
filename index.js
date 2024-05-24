@@ -7,7 +7,9 @@ const express = require("express"),
   mongoose = require("mongoose"),
   Models = require("./models.js"),
   bcrypt = require("bcrypt"),
-  dotenv = require("dotenv").config();
+  dotenv = require("dotenv").config(),
+  fs = require("fs"),
+  { S3Client, ListObjectsV2Command, PutObjectCommand, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 //import express-validator
 const { check, validationResult } = require("express-validator");
@@ -362,6 +364,88 @@ app.delete("/users/:Username", passport.authenticate("jwt", { session: false}), 
     res.status(500).send("Error: " + err);
   });
 });
+
+//////
+// s3 upload endpoints
+//////
+
+// instantiate and configure client object
+const s3Client = new S3Client({
+  region: "us-west-2",
+  // endpoint: "http://localhost:4566",
+  // forcePathStyle: true
+});
+
+// list objects in a s3 bucket
+app.get("/images", async (req, res) => {
+  try {
+    const listObjectsParams = {
+      Bucket: process.env.IMAGES_BUCKET
+    }
+    const listObjectsResponse = await s3Client.send(new ListObjectsV2Command(listObjectsParams));
+
+    if(listObjectsResponse.Contents.length === 0) {
+      res.send("The bucket is empty.");
+    } else {
+      res.status(200).json(listObjectsResponse); 
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("There was an error retrieving the bucket contents.");
+  }
+});
+
+
+// post an object to a s3 bucket
+app.post("/images", async (req, res) => {
+  try {
+    const file = req.files.image;
+    const fileName = req.files.image.name;
+    const tempPath = `${UPLOAD_TEMP_PATH}/${fileName}`; // what is the temp path?
+    
+    await file.mv(tempPath);
+
+    const putObjectParams = {
+      "Body": "",
+      "Bucket": process.env.IMAGES_BUCKET, // required
+      "Key": fileName // required
+    };
+
+    await s3Client.send(new PutObjectCommand(putObjectParams));
+
+    res.send("Image uploaded successfully.");
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("There was an error uploading image.");
+  }
+});
+
+
+// get an object from a s3 bucket
+app.get("/images/:imageName", async (req, res) => {
+  try {
+    const fileName = req.params.imageName;
+
+    const getObjectParams = {
+      "Bucket": process.env.IMAGES_BUCKET, // required
+      "Key": fileName // required
+    };
+
+    const getObjectResponse = await s3Client.send(new GetObjectCommand(getObjectParams));
+
+    if(getObjectResponse.Contents.length === 0) {
+      res.send("The bucket is empty.");
+    } else {
+      res.status(200).json(getObjectResponse);
+    }
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error retrieving item from bucket.");
+  }
+})
+
 
 //error handling
 app.use((err, req, res, next) => {
