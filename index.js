@@ -67,7 +67,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to Popopolis!");
 });
 
-let UPLOAD_TEMP_PATH = "C:\\Users\\howto\\Documents\\GitHub\\movie-api";
+let UPLOAD_TEMP_PATH = process.env.TEMP_PATH;
 
 /**
  * Get all movies
