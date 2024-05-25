@@ -376,8 +376,8 @@ app.delete("/users/:Username", passport.authenticate("jwt", { session: false}), 
 // instantiate and configure client object
 const s3Client = new S3Client({
   region: "us-west-2",
-  endpoint: "http://localhost:4566",
-  forcePathStyle: true
+  // endpoint: "http://localhost:4566",
+  // forcePathStyle: true
 });
 
 // list objects in a s3 bucket
