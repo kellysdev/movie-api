@@ -9,6 +9,7 @@ const express = require("express"),
   bcrypt = require("bcrypt"),
   dotenv = require("dotenv").config(),
   fs = require("fs"),
+  fileUpload = require("express-fileupload"),
   { S3Client, ListObjectsV2Command, PutObjectCommand, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 //import express-validator
@@ -20,6 +21,7 @@ const app = express();
 //use body-parser
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
+app.use(fileUpload());
 
 //import cors
 const cors = require("cors");
@@ -64,6 +66,8 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   res.send("Welcome to Popopolis!");
 });
+
+let UPLOAD_TEMP_PATH = "C:\\Users\\howto\\Documents\\GitHub\\movie-api";
 
 /**
  * Get all movies
@@ -372,8 +376,8 @@ app.delete("/users/:Username", passport.authenticate("jwt", { session: false}), 
 // instantiate and configure client object
 const s3Client = new S3Client({
   region: "us-west-2",
-  // endpoint: "http://localhost:4566",
-  // forcePathStyle: true
+  endpoint: "http://localhost:4566",
+  forcePathStyle: true
 });
 
 // list objects in a s3 bucket
@@ -399,14 +403,18 @@ app.get("/images", async (req, res) => {
 // post an object to a s3 bucket
 app.post("/images", async (req, res) => {
   try {
+    console.log(req.files);
     const file = req.files.image;
     const fileName = req.files.image.name;
-    const tempPath = `${UPLOAD_TEMP_PATH}/${fileName}`; // what is the temp path?
+    const tempPath = `${UPLOAD_TEMP_PATH}/${fileName}`;
     
-    await file.mv(tempPath);
+    file.mv(tempPath, (err) => {
+      console.log(err);
+      res.status(500);
+    });
 
     const putObjectParams = {
-      "Body": "",
+      "Body": file.data,
       "Bucket": process.env.IMAGES_BUCKET, // required
       "Key": fileName // required
     };
@@ -433,12 +441,8 @@ app.get("/images/:imageName", async (req, res) => {
     };
 
     const getObjectResponse = await s3Client.send(new GetObjectCommand(getObjectParams));
-
-    if(getObjectResponse.Contents.length === 0) {
-      res.send("The bucket is empty.");
-    } else {
-      res.status(200).json(getObjectResponse);
-    }
+    console.log(getObjectResponse);
+    res.send(await getObjectResponse.Body.transformToString());
     
   } catch (error) {
     console.log(error);
