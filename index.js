@@ -10,6 +10,7 @@ const express = require("express"),
   dotenv = require("dotenv").config(),
   fs = require("fs"),
   fileUpload = require("express-fileupload"),
+  mime = require("mime-types"),
   { S3Client, ListObjectsV2Command, PutObjectCommand, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 //import express-validator
@@ -434,21 +435,28 @@ app.post("/images", async (req, res) => {
 app.get("/images/:imageName", async (req, res) => {
   try {
     const fileName = req.params.imageName;
+    const mimeType = mime.lookup(fileName);
+
+    if (!mimeType) {
+      return res.status(400).send("Invalid image type.");
+    }
 
     const getObjectParams = {
       "Bucket": process.env.IMAGES_BUCKET, // required
-      "Key": fileName // required
+      "Key": fileName, // required
+      "RepsonseContentType": "image/png"
     };
 
     const getObjectResponse = await s3Client.send(new GetObjectCommand(getObjectParams));
-    console.log(getObjectResponse);
-    res.send(await getObjectResponse.Body.transformToString());
+
+    res.setHeader("Content-Type", mimeType);
+    getObjectResponse.Body.pipe(res);
     
   } catch (error) {
     console.log(error);
     res.status(500).send("Error retrieving item from bucket.");
   }
-})
+});
 
 
 //error handling
