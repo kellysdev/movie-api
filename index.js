@@ -407,17 +407,17 @@ app.post("/images", async (req, res) => {
     console.log(req.files);
     const file = req.files.image;
     const fileName = req.files.image.name;
-    const tempPath = `${UPLOAD_TEMP_PATH}/${fileName}`;
+    // const tempPath = `${UPLOAD_TEMP_PATH}/${fileName}`;
     
-    file.mv(tempPath, (err) => {
-      console.log(err);
-      res.status(500);
-    });
+    // file.mv(tempPath, (err) => {
+    //   console.log(err);
+    //   res.status(500);
+    // });
 
     const putObjectParams = {
       "Body": file.data,
       "Bucket": process.env.IMAGES_BUCKET, // required
-      "Key": fileName // required
+      "Key": "original-images/" + fileName // required
     };
 
     await s3Client.send(new PutObjectCommand(putObjectParams));
